@@ -27,6 +27,6 @@ body {
 }
 /* In global.css or another CSS file */
 .btn-custom {
-  @apply outline-white w-[18vw] h-[9vh] outline outline-2 fill-black bg-black text-white text-xl;
+  @apply outline-white w-[18vw] h-[9vh] outline outline-2  text-white text-xl;
 }
 
