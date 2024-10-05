@@ -1,37 +1,26 @@
-import Image from 'next/image'
-import React from 'react'
-import Bg from "@/logos/AboutHome1.png"
-import svg from "@/logos/arc.svg"
+import React from 'react';
+import bgImage from '@/logos/about-bg.jpg'; // Import the image
 
 const AboutUs = () => {
   return (
-    <div className='relative h-[120vh] w-full '>
-        <div className=''>
-        <h1 className='z-20 text-white absolute top-36 ml-6 space-y-20'>
-            <p className='text-6xl '>Who we Are</p> 
-            <p className='text-3xl '>About Ravan</p>
-            <p className='text-3xl w-[55vw] leading-[45px] tracking-wider'>Welcome to Ravan Real Estate, your trusted partner in Dubai's property market. Whether you're seeking residential, commercial, or off-plan properties, we offer expert guidance and a seamless experience. Established in 2024, we are dedicated to helping you find the perfect fit in Dubai's real estate landscape.</p>
-        </h1>
-        
-        
-        <Image 
-            src={svg} 
-            alt="gray arc to write text on" 
-            className='z-10 absolute -top-60 ' 
-            
-        />
-        </div>
-        <button className='z-20 absolute text-white outline-white  bottom-28 right-1/3 w-[15vw] h-[6vh] rounded-md outline-double'>Contact Us</button>
-        
-        <Image 
-            src={Bg} 
-            alt="About us background with bright Dubai skyline"
-            fill={true} 
-            className='object-cover z-0'
-        />
-      
+    <div 
+      className="relative h-[100vh] w-full bg-fixed bg-center bg-cover" 
+      style={{ backgroundImage: `url(${bgImage.src})` }} // Use the imported image
+    >
+      {/* Text Container */}
+      <div className="flex flex-col items-center justify-center h-full text-center space-y-8 px-4">
+        <p className="text-lg text-white">About Ravan</p> {/* Smaller "About Ravan" text */}
+        <p className="text-6xl text-white font-bold">Who We Are</p>
+        <p className="text-xl text-white max-w-4xl leading-8 mt-4" style={{ marginTop: '3rem' }}> 
+          Welcome to Ravan Real Estate, your trusted partner in Dubai's property market. Whether you're seeking residential, commercial, or off-plan properties, we offer expert guidance and a seamless experience. Established in 2024, we are dedicated to helping you find the perfect fit in Dubai's real estate landscape.
+        </p>
+        {/* Contact Button */}
+        <button className="text-black bg-white px-8 py-3 rounded-md font-semibold" style={{ marginTop: '5rem' }}>
+          Contact Us
+        </button>
+      </div>
     </div>
-  )
+  );
 }
 
-export default AboutUs
+export default AboutUs;

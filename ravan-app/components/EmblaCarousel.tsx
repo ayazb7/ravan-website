@@ -1,69 +1,42 @@
-import React from 'react'
-import { EmblaOptionsType } from 'embla-carousel'
-import { DotButton, useDotButton } from './EmblaCarouselDotButton'
-import {
-  PrevButton,
-  NextButton,
-  usePrevNextButtons
-} from './EmblaCarouselArrowButton'
-import useEmblaCarousel from 'embla-carousel-react'
-import "@/app/globals.css";
-import Image from '@/node_modules/next/image'
-import bg1 from "@/logos/emaar.png"
+// 
+
+import React from 'react';
+import useEmblaCarousel from 'embla-carousel-react';
+import { EmblaOptionsType } from 'embla-carousel';
+import AutoScroll from 'embla-carousel-auto-scroll'; // Import AutoScroll plugin
 
 type PropType = {
-  slides: []
-  options?: EmblaOptionsType
-}
+  slides: React.ReactNode[];
+  options?: EmblaOptionsType;
+};
 
-const EmblaCarousel: React.FC<PropType> = (props) => {
-  const { slides, options } = props
-  const [emblaRef, emblaApi] = useEmblaCarousel({ loop: true, ...options })
-
-  const { selectedIndex, scrollSnaps, onDotButtonClick } =
-    useDotButton(emblaApi)
-
-  const {
-    prevBtnDisabled,
-    nextBtnDisabled,
-    onPrevButtonClick,
-    onNextButtonClick
-  } = usePrevNextButtons(emblaApi)
+const EmblaCarousel: React.FC<PropType> = ({ slides, options }) => {
+  // Initialize Embla with AutoScroll plugin
+  const [emblaRef, emblaApi] = useEmblaCarousel(
+    { loop: true, ...options },
+    [
+      AutoScroll({
+        speed: 1,             // Slow down the scroll speed (lower is slower)
+        startDelay: 2000,     // Delay before auto-scrolling starts (in milliseconds)
+        stopOnInteraction: false, // Keep auto-scrolling even after user interaction
+        stopOnMouseEnter: false,  // Continue scrolling even if the mouse hovers over the carousel
+      })
+    ]
+  );
 
   return (
-    <section className="embla">
+    <section className="embla w-full overflow-hidden">
       <div className="embla__viewport" ref={emblaRef}>
-        <div className="embla__container">
-          {slides.map((index) => (
-            <div className="embla__slide" key={index}>
-              <div className="embla__slide__number">
-                {index}
-              </div>
+        <div className="embla__container flex">
+          {slides.map((slide, index) => (
+            <div className="embla__slide flex-shrink-0 w-full max-w-xs mx-2" key={index}>
+              {slide}
             </div>
           ))}
         </div>
       </div>
-
-      <div className="embla__controls">
-        <div className="embla__buttons">
-          <PrevButton onClick={onPrevButtonClick} disabled={prevBtnDisabled} />
-          <NextButton onClick={onNextButtonClick} disabled={nextBtnDisabled} />
-        </div>
-
-        <div className="embla__dots">
-          {scrollSnaps.map((_, index: number) => (
-            <DotButton
-              key={index}
-              onClick={() => onDotButtonClick(index)}
-              className={'embla__dot'.concat(
-                index === selectedIndex ? ' embla__dot--selected' : ''
-              )}
-            />
-          ))}
-        </div>
-      </div>
     </section>
-  )
-}
+  );
+};
 
-export default EmblaCarousel
+export default EmblaCarousel;
