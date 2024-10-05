@@ -7,7 +7,10 @@ import logo from "@/logos/logo.png";
 import Link from 'next/link';
 import Select, { SingleValue, StylesConfig } from 'react-select';
 import { CircleFlag } from 'next-circle-flags';
+import { cva } from "class-variance-authority";
 import { useCurrency } from '../context/currencyContext';
+import { cn } from '@/lib/utils'; // Adjust the path according to your project structure
+
 import {
   NavigationMenu,
   NavigationMenuContent,
@@ -18,6 +21,7 @@ import {
   NavigationMenuTrigger,
   NavigationMenuViewport,
 } from "@/components/ui/navigation-menu"; // Assuming this is the path where the NavigationMenu components are stored
+
 
 // Define the type for currency options
 interface CurrencyOption {
@@ -78,6 +82,9 @@ const NavBar: React.FC = () => {
   const { currency, setCurrency } = useCurrency();
   const [selectedLang, setSelectedLang] = useState('EN');
   const [scrolled, setScrolled] = useState(false);
+  const linkHoverEffectStyle = cva(
+    "group text-lg font-semibold inline-flex h-10 items-center justify-center rounded-md bg-background px-4 py-2 text-sm font-medium text-white transition-colors hover:bg-accent hover:text-accent-foreground focus:bg-accent focus:text-accent-foreground focus:outline-none disabled:pointer-events-none disabled:opacity-50"
+  );
 
   // Handle SingleValue in onChange
   const handleCurrencyChange = (option: SingleValue<CurrencyOption>) => {
@@ -94,6 +101,7 @@ const NavBar: React.FC = () => {
       window.removeEventListener('scroll', handleScroll);
     };
   }, []);
+  
 
   return (
     <>
@@ -134,9 +142,16 @@ const NavBar: React.FC = () => {
       </NavigationMenu>
           
         
-          <Link href="/en/about" className="text-white text-lg font-semibold px-6 py-4">Communities</Link>
-          <Link href="/en/about" className="text-white text-lg font-semibold px-6 py-4">Off Plan</Link>
-          <Link href="/en/about" className="text-white text-lg font-semibold px-6 py-4">Contact</Link>
+      <Link href="/en/about" className={cn(linkHoverEffectStyle())}>
+      <p className='text-lg font-semibold'>Communities</p>
+    </Link>
+    <Link href="/en/about" className={cn(linkHoverEffectStyle())}>
+    <p className='text-lg font-semibold'>Off PLan</p>
+    </Link>
+    <Link href="/en/about" className={cn(linkHoverEffectStyle())}>
+    <p className='text-lg font-semibold'>Contact</p>
+    </Link>
+
         </div>
 
         {/* Currency Selector Button */}
