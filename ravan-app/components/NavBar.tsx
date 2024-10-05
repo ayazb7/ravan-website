@@ -8,6 +8,16 @@ import Link from 'next/link';
 import Select, { SingleValue, StylesConfig } from 'react-select';
 import { CircleFlag } from 'next-circle-flags';
 import { useCurrency } from '../context/currencyContext';
+import {
+  NavigationMenu,
+  NavigationMenuContent,
+  NavigationMenuIndicator,
+  NavigationMenuItem,
+  NavigationMenuLink,
+  NavigationMenuList,
+  NavigationMenuTrigger,
+  NavigationMenuViewport,
+} from "@/components/ui/navigation-menu"; // Assuming this is the path where the NavigationMenu components are stored
 
 // Define the type for currency options
 interface CurrencyOption {
@@ -89,14 +99,44 @@ const NavBar: React.FC = () => {
     <>
       <nav className={`bg-black justify-between items-center p-4 transition-shadow duration-300 ${scrolled ? 'shadow-md' : ''} fixed w-full top-0 left-0 z-50 hidden md:flex`}>
         <div className="flex items-center cursor-pointer">
-          <Image src={logo} alt="Highend logo" height={40} width={40} /> {/* Adjust the logo size */}
+          <Image src={logo} alt="Highend logo" height={70} width={70} /> {/* Adjust the logo size */}
         </div>
-        <div className="flex justify-center items-center text-my_blue gap-8 h-full">
-          <Link href="/en/markets" className="text-white font-semibold px-6 py-4">Residential</Link>
-          <Link href="/services" className="text-white font-semibold px-6 py-4">Commercial</Link>
-          <Link href="/en/about" className="text-white font-semibold px-6 py-4">Communities</Link>
-          <Link href="/en/about" className="text-white font-semibold px-6 py-4">Off Plan</Link>
-          <Link href="/en/about" className="text-white font-semibold px-6 py-4">Contact</Link>
+        <div className="flex justify-center items-center text-my_blue  h-full">
+        <NavigationMenu>
+        <NavigationMenuList>
+          <NavigationMenuItem>
+          <NavigationMenuTrigger><p className='text-lg font-semibold'>Resedintial</p></NavigationMenuTrigger>
+            <NavigationMenuContent>
+              {/* Wrap the NavigationMenuLink inside Link */}
+              <Link href="/" passHref>
+                <NavigationMenuLink >To Buy</NavigationMenuLink>
+              </Link>
+              <Link href="/" passHref>
+                <NavigationMenuLink >For Sale</NavigationMenuLink>
+              </Link>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+          <NavigationMenuItem>
+            <NavigationMenuTrigger><p className='text-lg font-semibold'>Commercial</p></NavigationMenuTrigger>
+            <NavigationMenuContent>
+              {/* Wrap the NavigationMenuLink inside Link */}
+              <Link href="/" passHref>
+                <NavigationMenuLink >To Buy</NavigationMenuLink>
+              </Link>
+              <Link href="/" passHref>
+                <NavigationMenuLink >For Sale</NavigationMenuLink>
+              </Link>
+            </NavigationMenuContent>
+          </NavigationMenuItem>
+        </NavigationMenuList>
+        <NavigationMenuViewport />
+        <NavigationMenuIndicator />
+      </NavigationMenu>
+          
+        
+          <Link href="/en/about" className="text-white text-lg font-semibold px-6 py-4">Communities</Link>
+          <Link href="/en/about" className="text-white text-lg font-semibold px-6 py-4">Off Plan</Link>
+          <Link href="/en/about" className="text-white text-lg font-semibold px-6 py-4">Contact</Link>
         </div>
 
         {/* Currency Selector Button */}
