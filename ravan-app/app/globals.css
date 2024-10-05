@@ -207,6 +207,39 @@ body {
 .embla__dot--selected:after {
   box-shadow: inset 0 0 0 0.2rem var(--text-body);
 }
+.hover-effect {
+  position: relative;
+  overflow: hidden; /* Ensure the effect stays within the border radius */
+  color: white; /* Default text color */
+}
+
+.hover-effect::before {
+  content: '';
+  position: absolute;
+  top: 0;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  background-color: white; /* Background color on hover */
+  transform: scaleY(0); /* Start with no height */
+  transition: transform 0.3s ease-in-out; /* Smooth transition */
+  z-index: 0; /* Behind the text */
+}
+
+.hover-effect:hover::before {
+  transform: scaleY(1); /* Expand to full height on hover */
+}
+
+.hover-effect:hover {
+  color: var(--accent); /* Change text color on hover */
+}
+
+.hover-effect:focus {
+  outline: none; /* Remove default outline */
+}
+
+
+
 
 .hover-effect {
   position: relative;
