@@ -1,10 +1,20 @@
 import React, { useEffect, useState } from 'react';
 import { useCurrency } from '@/context/currencyContext';
 
+import EmblaCarousel from '@/components/EmblaCarousel';
+import { EmblaOptionsType } from 'embla-carousel'
+import Image from '@/node_modules/next/image';
+import bg1 from "@/logos/emaar.png"
+import sobha from "@/logos/sobha.png"
+import damac from "@/logos/damac.png"
+import danbure from "@/logos/danbure.png"
 const Partners: React.FC = () => {
   const { currency } = useCurrency();
   const [priceInCurrency, setPriceInCurrency] = useState<number | null>(null);
   const [loading, setLoading] = useState<boolean>(true);
+  const OPTIONS: EmblaOptionsType = { slidesToScroll: 'auto' }
+  const SLIDE_COUNT = 10
+  const SLIDES = [<Image src={bg1} alt="emaar"/>,<Image src={sobha} alt="sobha"/>,<Image src={damac} alt="damac"/>,<Image src={danbure} alt="danbure"/>]
 
   const BASE_PRICE_IN_AED = 1000; 
 
@@ -31,15 +41,9 @@ const Partners: React.FC = () => {
   }, [currency]);
 
   return (
-    <div className='flex items-center justify-center w-full h-[30vw] bg-black py-20'>
+    <div className='flex flex-col items-center justify-center w-full h-[40vw] bg-black py-20'>
       <h3 className='text-white text-3xl text-center'>Our Official Channel Partners</h3>
-      {loading ? (
-        <p className="text-white mt-5">Loading price...</p>
-      ) : (
-        <p className="text-white mt-5">
-          Price: {priceInCurrency?.toFixed(2)} {currency}
-        </p>
-      )}
+      <EmblaCarousel slides={SLIDES} options={OPTIONS}/>
     </div>
   );
 };
