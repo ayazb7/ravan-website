@@ -3,7 +3,7 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "dev": "next dev",
+    "dev": "next dev & npx next-video sync -w",
     "build": "next build",
     "start": "next start",
     "lint": "next lint"
@@ -20,6 +20,7 @@
     "lucide-react": "^0.445.0",
     "next": "^14.2.8",
     "next-circle-flags": "^1.0.17",
+    "next-video": "^1.2.0",
     "radix-ui": "^1.0.1",
     "react": "^18.3.1",
     "react-circle-flags": "^0.0.20",
