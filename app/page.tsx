@@ -17,7 +17,6 @@ export default function Home() {
       <AboutUs />
       <Services />
       <Discover />
-      
     </div>
   );
 }
