@@ -1,7 +1,7 @@
 "use client";
-import React, { useState, useEffect } from 'react';
-import Image, { StaticImageData } from 'next/image';
-import { useCurrency } from '../context/currencyContext';
+import React, { useState, useEffect } from "react";
+import Image, { StaticImageData } from "next/image";
+import { useCurrency } from "@/context/currencyContext";
 
 interface CardProps {
   imageSrc: StaticImageData;
@@ -10,10 +10,15 @@ interface CardProps {
   address: string;
 }
 
-const CardProp: React.FC<CardProps> = ({ imageSrc, basePrice, details, address }) => {
+const CardProp: React.FC<CardProps> = ({
+  imageSrc,
+  basePrice,
+  details,
+  address,
+}) => {
   const { currency, conversionRates } = useCurrency(); // Use conversion rates from context
   const [convertedPrice, setConvertedPrice] = useState(basePrice);
-  const [currencySymbol, setCurrencySymbol] = useState('AED');
+  const [currencySymbol, setCurrencySymbol] = useState("AED");
   const [isHovered, setIsHovered] = useState(false); // Add isHovered state
 
   useEffect(() => {
@@ -25,24 +30,30 @@ const CardProp: React.FC<CardProps> = ({ imageSrc, basePrice, details, address }
 
   return (
     <div
-      className={`relative overflow-hidden shadow-lg cursor-pointer rounded-2xl flex flex-col`} 
-      style={{ width: '350px', height: '450px' }} 
+      className={`relative overflow-hidden shadow-lg cursor-pointer rounded-2xl flex flex-col`}
+      style={{ width: "350px", height: "450px" }}
       onMouseEnter={() => setIsHovered(true)}
       onMouseLeave={() => setIsHovered(false)}
     >
       {/* Image Section */}
-      <div className="relative w-full h-1/2"> 
-        <Image src={imageSrc} alt={details} layout="fill" objectFit="cover" className="w-full h-full transition-transform duration-500" />
+      <div className="relative w-full h-1/2">
+        <Image
+          src={imageSrc}
+          alt={details}
+          layout="fill"
+          objectFit="cover"
+          className="w-full h-full transition-transform duration-500"
+        />
       </div>
 
       {/* Content Section */}
-      <div className="bg-[#2A2A2A] text-white p-4 flex flex-col justify-between h-1/2"> 
+      <div className="bg-[#2A2A2A] text-white p-4 flex flex-col justify-between h-1/2">
         <div className="text-start">
-          <p className='text-2xl font-bold mb-2'>
-            {currencySymbol} {convertedPrice.toFixed(2)} p/m
+          <p className="text-2xl font-bold mb-2">
+            {currencySymbol} {convertedPrice} p/m
           </p>
-          <p className='text-lg font-medium'>{details}</p>
-          <p className='text-lg'>{address}</p>
+          <p className="text-lg font-medium">{details}</p>
+          <p className="text-lg">{address}</p>
         </div>
 
         {/* Adjusted Buttons */}

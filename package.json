@@ -18,6 +18,8 @@
     "embla-carousel-react": "^8.3.0",
     "framer-motion": "^11.5.4",
     "lucide-react": "^0.445.0",
+    "mongodb": "^6.9.0",
+    "mongoose": "^8.7.1",
     "next": "^14.2.8",
     "next-circle-flags": "^1.0.17",
     "next-video": "^1.2.0",
