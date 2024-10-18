@@ -4,31 +4,37 @@ import bg from "@/logos/homephoto.png";
 import Video from "next-video";
 import "@/app/globals.css";
 import videoLoop from "@/videos/bg.mp4";
+
 const Landing = () => {
   return (
-    <div className="relative felx">
-      <Video
-        src={videoLoop}
-        autoPlay
-        muted
-        loop
-        playsInline
-        controls={false}
-        className="video"
-      ></Video>
-      <div className="absolute flex-col items-center justify-center z-10 space-x-8 top-1/4 left-64 w-fit">
-        <h1 className="text-white font-black text-5xl text-center mb-28">
+    <div className="relative flex items-center justify-center">
+      <div className="video-wrapper ">
+        <Video
+          src={videoLoop}
+          autoPlay
+          muted
+          loop
+          playsInline
+          controls={false}
+          className="video"
+        ></Video>
+        <div className="video-overlay"></div>
+      </div>
+      <div className="absolute flex flex-col items-center justify-center">
+        <h1 className="text-white font-black text-5xl text-center mb-8">
           Turning Property Dreams into Reality
         </h1>
-        <button className="btn-custom hover:bg-black hover:rounded-lg">
-          Commercial
-        </button>
-        <button className="btn-custom hover:bg-black hover:rounded-lg">
-          Resdential
-        </button>
-        <button className="btn-custom hover:bg-black hover:rounded-lg">
-          Off Plan
-        </button>
+        <div className="flex space-x-4 mt-8">
+          <button className="btn-custom hover:bg-black hover:rounded-lg">
+            Commercial
+          </button>
+          <button className="btn-custom hover:bg-black hover:rounded-lg">
+            Residential
+          </button>
+          <button className="btn-custom hover:bg-black hover:rounded-lg">
+            Off Plan
+          </button>
+        </div>
       </div>
     </div>
   );

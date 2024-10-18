@@ -105,15 +105,15 @@ const NavBar: React.FC = () => {
 
   return (
     <>
-      <nav className={`bg-black justify-between items-center p-4 transition-shadow duration-300 ${scrolled ? 'shadow-md' : ''} fixed w-full top-0 left-0 z-50 hidden md:flex`}>
+      <nav className={`bg-black justify-between items-center p-6 transition-shadow duration-300 ${scrolled ? 'shadow-md' : ''} fixed w-full top-0 left-0 z-50 hidden md:flex`}>
         <div className="flex items-center cursor-pointer">
           <Image src={logo} alt="Highend logo" height={70} width={70} /> {/* Adjust the logo size */}
         </div>
-        <div className="flex justify-center items-center text-my_blue  h-full">
+        <div className="flex justify-center items-center text-my_blue h-full">
         <NavigationMenu>
         <NavigationMenuList>
           <NavigationMenuItem>
-          <NavigationMenuTrigger><p className='text-lg font-semibold'>Resedintial</p></NavigationMenuTrigger>
+          <NavigationMenuTrigger><p className='text-lg font-semibold'>Residential</p></NavigationMenuTrigger>
             <NavigationMenuContent>
               {/* Wrap the NavigationMenuLink inside Link */}
               <Link href="/" passHref>
@@ -146,7 +146,7 @@ const NavBar: React.FC = () => {
       <p className='text-lg font-semibold'>Communities</p>
     </Link>
     <Link href="/en/about" className={cn(linkHoverEffectStyle())}>
-    <p className='text-lg font-semibold'>Off PLan</p>
+    <p className='text-lg font-semibold'>Off Plan</p>
     </Link>
     <Link href="/en/about" className={cn(linkHoverEffectStyle())}>
     <p className='text-lg font-semibold'>Contact</p>

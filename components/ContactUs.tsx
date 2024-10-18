@@ -57,7 +57,7 @@ const ContactUs = () => {
     }
   };
   return (
-    <div className="flex flex-col items-center justify-center ">
+    <div className="flex flex-col items-center justify-center mt-24 mb-24">
       <h2 className=" text-white text-start font-semibold text-5xl ">
         Contact Us
       </h2>
@@ -66,6 +66,8 @@ const ContactUs = () => {
           <Image
             src={ravan_logo}
             alt="ravan logo small with black background"
+            height={70}
+            width={70}
           />
           <div className="bg-white w-[0.1vw] h-[10vh] mx-5"></div>
           <div className="flex flex-col space-y-5">
