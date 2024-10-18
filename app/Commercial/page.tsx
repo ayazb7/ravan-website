@@ -1,87 +1,52 @@
-"use client";
-import CardProp from "@/components/CardProp";
-import React, { useEffect, useState } from "react";
+import React from "react";
+import PropertyFilters from "@/components/PropertyFilters";
+import FilteredProperties from "@/components/FilteredProperties";
+import SearchBg from "@/logos/Searchbg.png";
+import Link from "next/link";
 
-const CommercialPropertiesPage = () => {
-  const [properties, setProperties] = useState([]);
-  const [filteredProperties, setFilteredProperties] = useState([]);
-  const [loading, setLoading] = useState(true);
-  const [error, setError] = useState(null);
-  const [searchQuery, setSearchQuery] = useState("");
+const CommercialPropertiesPage = async ({ searchParams }) => {
+  const search =
+    typeof searchParams.search === "string" ? searchParams.search : undefined;
 
-  // Fetch properties when the component mounts
-  useEffect(() => {
-    const fetchProperties = async () => {
-      try {
-        const response = await fetch("/api/commercial"); // Replace with your correct API endpoint
-        if (!response.ok) {
-          throw new Error("Failed to fetch properties");
-        }
-
-        const data = await response.json();
-        setProperties(data.properties);
-        setFilteredProperties(data.properties); // Initially, show all properties
-      } catch (err) {
-        console.error(err);
-        setError(err.message);
-      } finally {
-        setLoading(false);
+  // Fetch properties server-side (can be based on the `search` parameter)
+  console.log(search);
+  const fetchProperties = async () => {
+    try {
+      const response = await fetch("http://localhost:3000//api"); // Replace with your correct API endpoint
+      if (!response.ok) {
+        throw new Error("Failed to fetch properties");
       }
-    };
-
-    fetchProperties();
-  }, []);
-
-  // Update filtered properties based on the search query
-  useEffect(() => {
-    const filtered = properties.filter(
-      (property) =>
-        property.type.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        property.status.toLowerCase().includes(searchQuery.toLowerCase()) ||
-        property.bedrooms.toString().includes(searchQuery) ||
-        property.price.toString().includes(searchQuery)
-    );
-    setFilteredProperties(filtered);
-  }, [searchQuery, properties]);
-
-  // Handle search input change
-  const handleSearchChange = (event) => {
-    setSearchQuery(event.target.value);
+      const data = await response.json();
+      return data.properties || [];
+    } catch (err) {
+      console.error("Error fetching properties:", err);
+      return [];
+    }
   };
 
-  // Render the properties
+  const properties = await fetchProperties();
+
   return (
-    <div className="mt-20">
-      <h2 className="text-2xl font-bold mb-4">Commercial Properties</h2>
-
-      {/* Search Bar */}
-      <input
-        type="text"
-        placeholder="Search properties..."
-        value={searchQuery}
-        onChange={handleSearchChange}
-        className="border-2 border-gray-300 p-2 mb-5 w-full rounded-md"
-      />
-
-      {loading ? (
-        <p>Loading properties...</p>
-      ) : error ? (
-        <p className="text-red-500">Error: {error}</p>
-      ) : filteredProperties.length > 0 ? (
-        <div className="space-y-4">
-          {filteredProperties.map((property) => (
-            <CardProp
-              key={property._id}
-              imageSrc={property.photoUrl}
-              basePrice={property.price}
-              address={property.address}
-              details={property.bedrooms}
-            />
-          ))}
+    <div className="flex flex-col bg-black items-center">
+      <div
+        className="relative h-[80vh] w-full bg-fixed bg-center bg-cover"
+        style={{ backgroundImage: `url(${SearchBg.src})` }}
+      >
+        <div className="flex flex-col items-center justify-center h-full text-center space-y-8 px-4">
+          <p className="text-lg text-white hover:font-extrabold">
+            <Link href="/">Home</Link> /{" "}
+            <Link href="/Commercial">Commercial</Link>
+          </p>
+          <h1 className="text-6xl text-white font-bold">
+            Commercial Properties
+          </h1>
+          <p className="text-xl text-white max-w-4xl leading-8 mt-4 w-[70vw]">
+            Something about commercial properties and Page
+          </p>
+          <PropertyFilters />
         </div>
-      ) : (
-        <p>No commercial properties found.</p>
-      )}
+      </div>
+      <FilteredProperties initialProperties={properties} />
     </div>
   );
 };
