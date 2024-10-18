@@ -11,7 +11,7 @@ import ListProperty from "@/components/ListProperty";
 
 export default function Home() {
   return (
-    <div className="flex-col mt-20 pt-5 items-center justify-center bg-black w-full">
+    <div className="flex-col items-center justify-center bg-black w-full">
       <Landing />
       <Partners />
       <AboutUs />
